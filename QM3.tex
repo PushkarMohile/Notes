@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath,latexsym,babel,amssymb,amsfonts,geometry}
+\usepackage[dvipsnames]{xcolor}
+
+\title{QM3 }
+\author{Pushkar Mohile}
+%New Commands
+\newcommand{\note}[1]{\color{blue} Note: #1}
+\newcommand{\set}[1]{ \left\{ #1 \right\} }
+\newcommand{\olsi}[1]{\,\overline{\!{#1}}} % overline short italic
+\newcommand{\bx}{\olsi{x}}
+\begin{document}
+\maketitle
+
+\section{Tensors: Introduction}
+Tensors are used to describe how quantities change on coordinate transforms. 
+%
+Consider a vector(?) space mapped by the coordinate system \( \set{x^1,x^2...}\) that smoothly maps 
+to a new set of coordinates  \(\set{\bx^1, \bx^2..}\). 
+\\
+If both spaces are \(N\) dimensional, we can write 
+\begin{align*}
+    dx^i &= \sum_{\alpha = 1}^N\frac{\partial x^i}{\partial \bx^\alpha} d\bx^\alpha \\
+    d\bx^i &= \sum_{\alpha = 1}^N\frac{\partial \bx^i}{\partial x^\alpha} dx^\alpha
+\end{align*}
+In the Einstein summation notation we can skip the \(\sum\) sign and sum over all possible values of
+ repeated (dummy) indices. All the free indices give us a tensor quantity. For example
+\begin{align*}
+    \frac{dx^i}{dx^j} &= \delta_j^i \\
+    \frac{d\bx^\alpha}{d\bx^\beta} &= \delta_\beta^\alpha
+\end{align*}
+Where \(\delta \) is the usual kronecker delta tensor. \\
+The way mathematical objects 'transform' is used to classify them: \\
+\textbf{Rank 1 contravariant tensor} \\
+A group of \(N\) functions that depend on coordinates \(A^{i}\) is a contravariant tensor if it transforms on changing coordinates as
+\begin{equation*}
+    \olsi{A}^\alpha = \frac{\partial \bx^\alpha }{\partial x^j}A^j
+\end{equation*} 
+Observe that on multiplying by \(\frac{\partial x^i}{\partial\bx^\alpha} \) and summing over all \(\alpha\) \
+we get 
+\begin{align*}
+    \frac{\partial x^i}{\partial \bx^\alpha} \olsi{A}^\alpha &=  \frac{\partial x^i}{\partial \bx^\alpha} \frac{\partial \bx^\alpha }{\partial x^j}A^j \\
+    \frac{\partial x^i}{\partial \bx^\alpha} \olsi{A}^\alpha &= \delta_j^i A^j \\
+    \frac{\partial x^i}{\partial \bx^\alpha} \olsi{A}^\alpha &= A^i
+\end{align*}
+Using the chain rule expansion to show \(\frac{\partial x^i}{\partial x^j} =  \frac{\partial x^i}{\partial \bx^\alpha} \frac{\partial \bx^\alpha }{\partial x^j} \).
+This shows us the transformation is consistent for both coordinate changes \(\set{x^1,x^2..}\to \set{\bx^1,\bx^2..} \) and vice versa. \\
+\textbf{Rank 1 covariant tensor} \\
+A group of \(N\) functions that depend on coordinates \(A_{i}\) is a covariant tensor if it transforms on changing coordinates as
+\begin{align*}
+    \olsi{A}_\alpha &= \frac{\partial x^j }{\partial \bx^\alpha}A_j \\
+    A_i &= \frac{\partial \bx^\alpha }{\partial x^i}\olsi{A}_\alpha
+\end{align*} 
+The gradient of a scalar field for example is a covariant vector. Let \(\phi(\set{x^i}) = \phi(\set{\bx^i}) \) 
+be a scalar field that is left unchanged on transforming to a new coordinate system. It's gradient is 
+given by a covariant tensor. 
+\begin{align*}
+    A_i &= \frac{\partial \phi}{\partial x^i}
+\end{align*}
+It is easy to observe on transforming coordinates, using the chain rule that  
+\begin{align*}
+    \olsi{A}_\alpha &= \frac{\partial \phi}{\partial \bx^i} \\
+    \olsi{A}_\alpha &= \frac{\partial x^i}{\partial \bx^\alpha}\frac{\partial \phi}{\partial x^i} \\
+    \olsi{A}_\alpha &= \frac{\partial x^i}{\partial \bx^\alpha}A_i
+\end{align*}
+Thus verifying that it is a covariant tensor. 
+\\
+\textbf{General tensor} \\
+\(A\) is a general mixed tensor if it transforms as follows: 
+\begin{equation*}
+    \olsi{A}_{\beta_1\beta_2...\beta_q}^{\alpha_1\alpha_2...\alpha_p} = \frac{\partial\bx^{\alpha_1}}{\partial x^{i_1}}\frac{\partial\bx^{\alpha_2}}{\partial x^{i_2}}...\frac{\partial x^{j_1}}{\partial \bx^{\beta_1}}...A_{j_1j_2...j_q}^{i_1i_2...i_p}
+\end{equation*}
+
+2 tensors can only be added or susbtracted if they are of the same type ie they both 
+have the same no of co and contravaraint indices. \\
+%\textbf{Operations on tensors}
+%We have the outer and inner product on 2 tensors that give us a new tensor. Tensor contraction reduces the
+Index lowering and raising 
+
+
+\end{document}
