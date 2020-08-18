@@ -24,3 +24,7 @@ QM3.synctex.gz
 QM3.fdb_latexmk
 QM3.aux
 *.aux
+*.fdb_latexmk
+*.fdb_latexmk
+QM3.aux
+*.log
