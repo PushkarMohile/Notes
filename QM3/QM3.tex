@@ -1,11 +1,12 @@
 \documentclass{article}
 \usepackage{amsmath,latexsym,babel,amssymb,amsfonts,geometry}
 \usepackage[dvipsnames]{xcolor}
+\geometry{margin = 1in}
 
 \title{QM3 }
 \author{Pushkar Mohile}
 %New Commands
-\newcommand{\note}[1]{\color{blue} Note: #1}
+\newcommand{\note}[1]{\color{blue} Note: #1 \color{black}}
 \newcommand{\set}[1]{ \left\{ #1 \right\} }
 \newcommand{\olsi}[1]{\,\overline{\!{#1}}} % overline short italic
 \newcommand{\bx}{\olsi{x}}
@@ -71,18 +72,128 @@ Thus verifying that it is a covariant tensor.
     \olsi{A}_{\beta_1\beta_2...\beta_q}^{\alpha_1\alpha_2...\alpha_p} = \frac{\partial\bx^{\alpha_1}}{\partial x^{i_1}}\frac{\partial\bx^{\alpha_2}}{\partial x^{i_2}}...\frac{\partial x^{j_1}}{\partial \bx^{\beta_1}}...A_{j_1j_2...j_q}^{i_1i_2...i_p}
 \end{equation*}
 
-2 tensors can only be added or susbtracted if they are of the same type ie they both 
-have the same no of co and contravaraint indices. \\
-%\textbf{Operations on tensors}
-%We have the outer and inner product on 2 tensors that give us a new tensor. Tensor contraction reduces the
-Index lowering and raising 
+2 tensors can only be added or susbtracted if they are of the same type ie they both have the same no of co and contravaraint indices.\\
 
+\note{In order to prove something is a tensor you need to show that it follows the transformation laws as a in general mixed tensor. This becomes relevent in the next part where we look at operation on tensors that give us new tensors} \\
+
+\textbf{Operations on tensors}
+\begin{itemize} 
+    \item \textbf{Inner Product:} The inner product on 2 tensors sums up all the values along one index in the product. 
+    \begin{equation*}
+        A_{lm}^{ijk} B _{i}^{op} = \sum_{\forall i}  A_{lm}^{ijk} B _{i}^{op}
+    \end{equation*}
+    This transforms like a tensor with 4 contra (\(jkop\)) and 2 co \(lm)\) indices. 
+    \item \textbf{Outer Product:} The outer product on two tensors gives us a new tensor with all the indices of the 2 tensors. 
+    \begin{equation*}
+        C_{lmn}^{ijk} = A_{l}^{ij} B_{lm}^{k}
+    \end{equation*}
+    \item \textbf{Contraction:} Contraction is an operation on a mixed tensor that involves summing over one co and one contra index of that tensor. If you have a tensor $A_{lmn}^{ijk}$ tensor contraction involves evaluating 
+    \begin{equation*}
+        A_{imn}^{ijk} = \sum_{\forall i} A_{imn}^{ijk}
+    \end{equation*} 
+    \note{This is a generalization of the trace of a finite dimensional $2\times 2$ square matrix}
+\end{itemize}
+The outcome of all the above operations is a new tensor. The proof of this pact involves a little algebra where we write down the transformation law of each tensor in the product and multiply. On making on co and one contravariant index the same we end up with a quantity of the form \( \frac{\partial x^i}{\partial\olsi{x}^j} \frac{\partial \olsi{x}^r}{\partial x^p} \) which is just the Kronecker delta \(\delta_p^i \) that makes all terms with different \(i,j\) 0 that completes the proof. \\
+
+\textbf{Quotient Law:} It is in general difficult/irritating to prove whether or not something is a tensor. The quotient law is another (easier?) way to prove something to be a tensor. The result is as follows: \\
+If an unknown quantity \(A[i,j,k]\) on taking an inner product with an arbitrary tensor gives us a new tensor then \(A\) is also a tensor. For example if 
+\begin{equation*}
+    A[i,j,k] B^{jk} = C^i
+\end{equation*}
+Where \(B,C\) are tensors then \(A\) is a tensor with 1-contra and 2-co variant indices. The proof of this involves looking at quantities \(A,B,C\) in a new coordinate frame where \(A\to \olsi{A}, B\to \olsi{B}, C \to olsi{C} \). As \(B,C\) are tensors 
+\begin{align*}
+    &\olsi{A}[\alpha,\beta,\gamma] \olsi{B}^{\beta\gamma} = \olsi{C}^\alpha \\
+    &\olsi{A}[\alpha,\beta,\gamma] \frac{\partial\olsi{x}^\beta}{\partial x^j} \frac{\partial\olsi{x}^\gamma}{\partial x^k} B^{jk} =  \frac{\partial \olsi{x}^\alpha}{\partial x^i} A[i,j,k] B^{jk}
+\end{align*} 
+By substituting in the expression of \(C^i\). But because \(B^{jk}\) is in general a nonzero tensor we can equate the 'coefficients' of \(B\) to get the transformation law for \(A\): 
+\begin{align*}
+    &\olsi{A}[\alpha,\beta,\gamma] \frac{\partial\olsi{x}^\beta}{\partial x^j} \frac{\partial\olsi{x}^\gamma}{\partial x^k} =  \frac{\partial \olsi{x}^\alpha}{\partial x^i} A[i,j,k] \\
+    &\olsi{A}[\alpha,\beta,\gamma] = \frac{\partial \olsi{x}^\alpha}{\partial x^i} \frac{\partial x^j}{\partial\olsi{x}^\beta } \frac{\partial x^k }{\partial\olsi{x}^\gamma} A[i,j,k]
+\end{align*} 
+Which is indeed the transformation law for a 1-contra 2-co tensor. \\
+\note{To 'invert' the transformation law, we can't directly invert \( \frac{\partial\olsi{x}^\beta}{\partial x^j} \) and use \(\frac{1}{\frac{dy}{dx}}= \frac{dx}{dy} \). Instead we should multiply both sides by \(\frac{\partial x^j}{\partial\olsi{x}^\beta} \) and sum over the  repeated index.} \\
+Recall from special theory of relativity that this technique can be quite useful in for example proving that the inner product of the 4-momentum with itself \(p^\mu p_\mu \) is a relativistic invariant. The inner product obviously returns a scalar (rank 0 tensor) which is invariant on a lorentz transform. \\
+
+\textbf{Some special tensors} 
+\begin{itemize}
+    \item \textbf{Symmetric and antisymmetric tensor:} A tensor is symmetric or antisymmetric wrt two indices if 
+    \begin{align*}
+        A_{lmn}^{ijk} &= A_{lmn}^{jik} \\
+        A_{lmn}^{ijk} &= -A_{lmn}^{jik}
+    \end{align*} 
+    respectively. The product of a symmetric and antisymmetric tensor is 0. We can decompose any tensor into a symmetric and antisymmetric parts. 
+    \item \textbf{Metric tensor:} The metric tensor \(g_{\mu\nu}\)is a really important tensor in SR/GR that encodes in some information about the geometry of the underlying Riemannian manifold (You have tangent vectors with an inner product at every point in the space ). The metric tensor gives us infinitesimal distances around a point in a manifold as 
+    \begin{equation*}
+        ds^2 = g_{\mu\nu}dx^\mu dx^\nu
+    \end{equation*}
+    Where the determinant of \(g\) is nonzero. 
+    If the metric depends on the coordinates then the manifold is Riemannian. If it is independent of the coordinates it is a Euclidian manifold (Eg Minkowski spacetime in SR). The inner product of the metric tensor with itself is given by 
+    \begin{equation*}
+        g_{ij}g^{jk} = \delta_i^{k}
+    \end{equation*}   
+    \(g\) is a symmetric tensor. The most important property of \(g\) in this context is the index loweing and raising. 
+    \begin{align*}
+        A^i g_{ij} &= A_j \\
+        A_j g^{ij} &= A^i
+    \end{align*}
+    The metric tensor for SR (Minkowski Metric) is 
+    \begin{equation*}
+        g_{\mu\nu} = \begin{bmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & -1 & 0 & 0 \\
+            0 & 0 & -1 & 0 \\
+            0 & 0 & 0 & -1
+        \end{bmatrix}
+    \end{equation*}
+\end{itemize}
 
 \section{Klein Gordan Equation L2}
-Relativistic physics describes particle 
-behaivour at high energies. We want our description of the laws of physics to be invariant under lorentz transformations. This means that the time coordinate should be treated similar to the spatial coordinates. \\
+Relativistic physics describes particle behaivour at high energies. We want our description of the laws of physics to be invariant under lorentz transformations. This means that the time coordinate should be treated similar to the spatial coordinates. \\
 Further we want to continue to maintain the uncertainty principle in QM. \(\Delta x ~ \frac{h}{2\pi m_0c}\). If the particles come too close together you have interactions leading to pair production for \(E > 2m_0c^2\) \\
 In relativistic QM we drop the assumption of conservation of particle number because of pair creation/annhilation \\
+
+In QM we move the observables in Cmech to operators that act on eigenstates. In Relativistic QM we want to put time and the spatial coordinates on the same footing. So 
+
+\begin{align*}
+    (x,y,z) \to = x^\mu = \{ ct, x,y,z \} &= \{x^0, x^1 ,x^2,x^3 \} \\
+     x_\mu = g_{\mu \nu} x^\nu &= \{ct, -x, -y, -z \}\\
+    (p_x,p_y,p_z)\to p^\mu &= \{\frac{E}{c}, p_x, p_y, p_z \} = \{\frac{E}{c}, \mathbf{p} \}\\
+    \hat{p} = (i\hbar \partial_x, i\hbar \partial_y, i\hbar \partial_z ) \to \hat{p}^\mu &=  \{ i\hbar \partial_{x_0}, i\hbar \partial_{x_1}, i\hbar \partial_{x_2}, i\hbar \partial_{x_3} \}
+\end{align*}
+Note that \(p^\mu\) can be succintly written as \(p^\mu = i\hbar \nabla^\mu  \) where
+\begin{equation*}
+    \nabla ^\mu = \partial_{x_\mu} = \{\frac{\partial}{c\partial t},-\frac{\partial}{\partial x},-\frac{\partial }{\partial y},-\frac{\partial}{\partial z} = \{\partial_{ct}, - \olsi{\nabla}   \}
+\end{equation*} 
+These obey the fundamental commutation relations 
+\begin{equation*}
+    \left[ p^\mu , x^\nu  \right] = i\hbar g^{\mu\nu}
+\end{equation*}
+The energy relations in relativistic mechanics gives us 
+\begin{equation*}
+    p^\mu p_\mu = \frac{E^2}{c^2} - \mathbf{p}^2 = m_0^2 c^2 
+\end{equation*}
+We upgrade this to QM to get the Klein Gordan equation 
+\begin{equation*}
+    \hat{p}^\mu\hat{p}_\mu \psi = m_0^2c^2 \psi
+\end{equation*}
+Where \(\psi\) is a scalar field. The inner product expands to 
+\begin{align*}
+    -\hbar^2 \Box \psi &= m_0^2c^2 \psi \\
+    \Box = \frac{1}{c^2} \partial_t^2 &- \left(\partial_x^2 + \partial_y^2 + \partial_z^2\right)
+\end{align*}
+Where \(\Box\) is the d'Alembertian operator. Note that this PDE is linear. Solutions to this take the form 
+\begin{equation*}
+    \psi = A\exp\left[ \frac{i}{\hbar}\left(\mathbf{p.x} \mp Et \right) \right]
+\end{equation*}
+The energy may be positive or negative with
+\begin{equation*}
+    E = \pm \sqrt{p^2c^2 + m_0^2c^4}
+\end{equation*}
+\textbf{Conservation laws}: 
+On multiplying the KG equation with \(\psi^*\), taking the conjugate and subtracting, we get 
+\begin{align*}
+placeholder
+\end{align*}
 
 Everything is assumed to be 0 at spacetime infinity
 \note{Look up time energy uncertainty in QM} \\
