@@ -20,10 +20,12 @@ Note that a topology can be defined in general on any set of a space, not just a
 ***Definition 1.2:*** A **cover** of a $X$ is a collection of sets whose union includes $X$ as a subset.   
 If $C = \{U_\alpha: \alpha \in A \}$ is an indexed family of sets ($A$ is indexing set) $U_\alpha$ then $C$ is a cover of $X$ if $X\subseteq\bigcup_{\alpha\in A}U_\alpha$   
 
-***Definition 1.3:*** A topological **basis** of $X$ is a  
+***Definition 1.3:*** A topological **basis** $\mathfrak{B}$ of $X$ is the *coarsest* possible topology on $X$. $B$ is a basis on $\tau$ iff
+1. For each $x \in X$ there is a $B \in \mathfrak{B}$ such that $x \in B$
+2. If $x \in A \cap B$ where $A,B \in \mathfrak{B}$ then there is atleast one $C \in \mathfrak{B}$ such that $C \subseteq A\cap B$  
+In order to understand these conditions note that condition 1 means that $\mathfrak{B}$ spans all of $X$ and condition 2 tells us that any common elements in $\mathfrak{B}$ can be built up from the union property of $\tau$
 
 ***Definition 1.4:*** An **open cover** is a cover where every set in the cover is open. Each $U_\alpha \in \tau$  
-Here the idea is that we want to describe the set using a topological basis.   
 
 ***Definition 1.5:*** A **refinement** of a cover $C$ of a set $X$ is a new cover $D$ such that every set in $D$ is contained in some set in $C$. $D = \bigcup_{\beta \in A} V_\beta$ where $V_\beta \subseteq U_\alpha$  
 The notion of refinement is clearly *refining* the cover in that we are finding a cover that is in some sense smaller than the previous cover and is better able to cover the set with less sets.  
@@ -42,9 +44,13 @@ A closed subset of a compact set is compact. However a compact space need not be
 - The orthogonal group $O(3)$ in $\R^9$
 - The special unitary group $SU(n)$ in $\mathbb{C}^{n^2}$ or $\R^{2n^2}$
 
-***Definition 1.8*** A function $f: X \to Y$ is said to be **continous** if for every open set $A \in Y$ $f^{-1}(A)$ is an open set in $X$. Notice that this definition encompasses the usual definition of continuity I am used to in metric spaces: In that case we have to find an open neighbourhood around a point $x_0$ for every open ball $\rho(f(x),f(x_0)) < \epsilon$ in $Y$
+***Definition 1.8*** A function $f: X \to Y$ is said to be **continous** if for every open set $A \in Y$ $f^{-1}(A)$ is an open set in $X$. Notice that this definition encompasses the usual definition of continuity I am used to in metric spaces: In that case we have to find an open neighbourhood around a point $x_0$ for every open ball $\rho(f(x),f(x_0)) < \epsilon$ in $Y$  
+**Top** the category of topological spaces consists of objects as topological spaces and continous function as morphisms. Note that composition of continous functions is also continous which is a very easy based on the definition of a continous functions. 
 
 ***Definition 1.8*** A **Homeomorphism** is a function $f$ between 2 topological spaces such that both $f$ and $f^{-1}$ are both continous is a homeomorphism (Not to be confused with homomorphism). Homeomorphisms are isomorphisms in the category of topological spaces **Top**
+
+## Some interesting Topologies 
+1. 
 
 **Theorem:** If $X$ is a compact topological space, $Y$ is an arbitray Hausdorff space and $f: X \to Y$ is a continous surjection then 
 1. $Y$ is compact. 
